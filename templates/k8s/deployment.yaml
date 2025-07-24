@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: selenium-framework
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: selenium-framework
+  template:
+    metadata:
+      labels:
+        app: selenium-framework
+    spec:
+      containers:
+      - name: selenium-framework
+        image: anikeshsmn26/selenium-framework:latest
+        imagePullPolicy: Always

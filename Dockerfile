@@ -12,8 +12,8 @@ FROM eclipse-temurin:17-jdk
 
 WORKDIR /app
 
-# Copy JAR from builder
-COPY --from=builder /app/target/*-shaded.jar /app/selenium-tests.jar
+# # Copy JAR from builder
+COPY --from=builder /app/target/selenium-framework-1.0-SNAPSHOT.jar /app/selenium-tests.jar
 
 # Copy testng.xml to run TestNG tests
 COPY testng.xml /app/testng.xml
