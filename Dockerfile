@@ -1,29 +1,22 @@
-# Use an official Maven image to build the project
-FROM maven:3.8.7-openjdk-17 AS build
+# Stage 1: Build
+FROM maven:3.9.6-eclipse-temurin-17 AS builder
 
-# Set working directory inside the container
 WORKDIR /app
+COPY . .
 
-# Copy pom and source files
-COPY pom.xml .
-COPY src ./src
-COPY testng.xml .
-
-# Build the project using Maven
+# Package with dependencies
 RUN mvn clean package -DskipTests
 
-# ------------------------------------------------------------------
-
-# Use a lightweight Java image to run the test
-FROM openjdk:17-jdk-slim
+# Stage 2: Run
+FROM eclipse-temurin:17-jdk
 
 WORKDIR /app
 
-# Copy test files from build stage
-COPY --from=build /app/target /app/target
+# Copy JAR from builder
+COPY --from=builder /app/target/*-shaded.jar /app/selenium-tests.jar
 
-# Copy the testng.xml and compiled classes
-COPY testng.xml .
+# Copy testng.xml to run TestNG tests
+COPY testng.xml /app/testng.xml
 
-# Set entry point to run tests (adjust JAR name if needed)
-ENTRYPOINT ["java", "-cp", "target/classes;target/test-classes;target/dependency/*", "org.testng.TestNG", "testng.xml"]
+# Run tests
+ENTRYPOINT ["java", "-jar", "selenium-tests.jar", "-testngxml", "testng.xml"]
