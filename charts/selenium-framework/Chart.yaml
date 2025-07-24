@@ -1,0 +1,3 @@
+apiVersion: v2
+name: selenium-framework
+version: 0.1.0

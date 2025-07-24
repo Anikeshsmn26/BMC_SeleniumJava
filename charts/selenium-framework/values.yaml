@@ -1,0 +1,4 @@
+image:
+  repository: anikeshsmn26/selenium-framework
+  tag: latest
+  pullPolicy: IfNotPresent
