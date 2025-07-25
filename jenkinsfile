@@ -6,7 +6,8 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'git remote add origin https://github.com/Anikeshsmn26/BMC_SeleniumJava.git'
+                 checkout scm
+                // git 'git remote add origin https://github.com/Anikeshsmn26/BMC_SeleniumJava.git'
             }
         }
         stage('Build') {
