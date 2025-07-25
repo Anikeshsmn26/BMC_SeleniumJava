@@ -1,0 +1,13 @@
+apiVersion: v2
+name: selenium-framework
+description: A Helm chart to deploy Selenium Java Automation Framework on Kubernetes
+
+# Chart type: Application (used to deploy software)
+type: application
+
+# Chart version (increment this with changes)
+version: 0.1.0
+
+# App version (this should match the version of your Selenium framework)
+appVersion: "1.0.0"
+# This is the chart for deploying Selenium Java Automation Framework on Kubernetes
